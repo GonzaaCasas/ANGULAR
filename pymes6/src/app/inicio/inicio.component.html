@@ -1,0 +1,154 @@
+<p>inicio works!, numero = {{numero}}</p>
+<br>
+<p>{{'El nombre es: ' + obtenerNombre()}}</p>
+<p>El nombre editable es {{nombreEditable}}</p>
+
+<button (click)="cambiarNombre()"> Cambiar Nombre</button>
+
+<form method="POST" action="https://jkorpela.fi/cgi-bin/echo.cgi">
+  <h1>PERSONA version nueva</h1>
+  <fieldset>
+    <legend style="background: aqua">Datos de la persona</legend>
+    <table>
+      <tr>
+        <td><label>Apellido</label></td>
+        <td>
+          <input
+            type="text"
+            name="apellido"
+            placeholder="paterno y materno"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label>Nombre</label></td>
+        <td><input type="text" name="nombre" /></td>
+      </tr>
+      <tr>
+        <td><label>Sexo</label></td>
+        <td>
+          <input
+            type="radio"
+            name="Sexo"
+            value="Masculino"
+            checked
+          />Masculino
+          <input type="radio" name="sexo" value="Femenino" />Femenino
+        </td>
+      </tr>
+      <tr>
+        <td><label>Tipo Documento</label></td>
+        <td>
+          <select name="Tipo Doc.">
+            <option value="DNI">DNI</option>
+            <option value="Libreta">Libreta</option>
+            <option value="Pasaporte">Pasaporte</option>
+            <option value="" selected></option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Numero de Documento</label></td>
+        <td><input type="number" name="nroDoc" value="232333322" /></td>
+      </tr>
+      <tr>
+        <td><label>Fecha Nacimiento</label></td>
+        <td>
+          <input type="date" name="nac" value="2022-08-10" />
+        </td>
+      </tr>
+      <tr>
+        <td><label>Telefono</label></td>
+        <td>
+          <input type="number" name="caracter" value="0054" disabled />
+          <input type="number" name="nroTel" />
+        </td>
+      </tr>
+      <tr>
+        <td><label>Ingresos Mensuales</label></td>
+        <td><input type="number" name="ingresosMensuales" /></td>
+      </tr>
+      <tr>
+        <td><label>Comida preferida</label></td>
+        <td>
+          <select name="comidaPreferida" size="5">
+            <option value="Lomito">Lomito completo</option>
+            <option value="Pizza muzzarera">Pizza muzzarera</option>
+            <option value="Tarta jámon">Tarta jámon</option>
+            <option value="Sándwich milanesa">Sándwich milanesa</option>
+            <option value="" selected>(Sin selección)</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label>Observaciones</label></td>
+        <td>
+          <textarea
+            name="obervaciones"
+            cols="50"
+            rows="5"
+            placeholder="Ingrese sus comentarios aqui"
+          ></textarea>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input
+            type="checkbox"
+            name="auto"
+            value="Tiene Auto"
+            checked
+          />Tiene Auto Propio
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input
+            type="checkbox"
+            name="casa"
+            [value]="casaPropia"
+            (change)="casaPropiaCheck()"
+          />Tiene Casa Propia
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+  <br>
+  <fieldset *ngIf="casaPropia">
+    <legend style="background: aqua">Casa Propia - Domicilio</legend>
+    <table>
+      <tr>
+        <td>Calle</td>
+        <td><input type="text" name="calle" /></td>
+      </tr>
+      <tr>
+        <td>Altura</td>
+        <td><input type="number" name="altura" /></td>
+      </tr>
+      <tr>
+        <td>Localidad</td>
+        <td><input type="text" name="localidad" /></td>
+      </tr>
+      <tr>
+        <td>Provincia</td>
+        <td>
+          <select name="provincia">
+            <option value="santaFe">Santa Fe</option>
+            <option value="misiones">Misiones</option>
+            <option value="sanLuis">San Luis</option>
+            <option value="sanJuan">San Juan</option>
+            <option value="cba" selected>Cordoba</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Codigo Postal</td>
+        <td><input type="number" name="cp" /></td>
+      </tr>
+    </table>
+  </fieldset>
+  <input type="submit" value="Grabar" />
+  <input type="reset" value="Reiniciar formulario" />
+</form>
