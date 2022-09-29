@@ -1,4 +1,3 @@
-import '@angular/localize/init';
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
@@ -40,9 +39,11 @@ import '@angular/localize/init';
 /** IE10 and IE11 requires the following to support `@angular/animation`. */
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 
+
 /** Evergreen browsers require these. **/
 // import 'core-js/es6/reflect';
 // import 'core-js/es7/reflect';
+
 
 /**
  * Web Animations `@angular/platform-browser/animations`
@@ -51,10 +52,13 @@ import '@angular/localize/init';
  */
 // import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 
+
+
 /***************************************************************************************************
  * Zone JS is required by Angular itself.
  */
-import 'zone.js/dist/zone'; // Included with Angular CLI.
+import 'zone.js/dist/zone';  // Included with Angular CLI.
+
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
