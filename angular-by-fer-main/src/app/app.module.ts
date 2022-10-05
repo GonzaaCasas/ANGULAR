@@ -11,17 +11,22 @@ import { RouterModule } from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
 import { ArticulosComponent } from './components/articulos/articulos.component';
 
+import { ReactiveFormsModule } from "@angular/forms";
+import { NombreArticulosPipe } from './pipes/nombre-articulos.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     ArticuloFamiliasComponent,
     MenuComponent,
-    ArticulosComponent
+    ArticulosComponent,
+    NombreArticulosPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/inicio', pathMatch: 'full' },
       { path: 'inicio', component: InicioComponent },
