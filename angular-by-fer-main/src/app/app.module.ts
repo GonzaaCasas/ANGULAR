@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http'
+import {
+  NgbPaginationModule
+} from "@ng-bootstrap/ng-bootstrap";
+
 
 import { AppComponent } from './app.component';
 import { InicioComponent } from './components/inicio/inicio.component';
@@ -32,7 +36,8 @@ import { NombreArticulosPipe } from './pipes/nombre-articulos.pipe';
       { path: 'inicio', component: InicioComponent },
       { path: 'articulosfamilias', component: ArticuloFamiliasComponent },
       { path: 'articulos', component: ArticulosComponent },
-    ])
+    ]),
+    NgbPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
