@@ -2,6 +2,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Articulo} from "../../models/articulo";
 import { ArticuloFamilia } from "../../models/articulo-familia";
+import { ModalDialogService } from "../../services/modal-dialog.service";
 
 import { MockArticulosService } from "../../services/mock-articulos.service";
 import { ArticulosService } from "../../services/articulos.service";
@@ -86,8 +87,9 @@ export class ArticulosComponent implements OnInit {
 
 
   constructor(
-    private articulosService: ArticulosService,
-    private articulosFamiliasService: ArticulosFamiliasService,
+    private articulosService: MockArticulosService,
+    private articulosFamiliasService: MockArticulosFamiliasService,
+    private modalDialogService: ModalDialogService
   ) {}
 
   ngOnInit() {
@@ -107,15 +109,18 @@ export class ArticulosComponent implements OnInit {
     this.FormRegistro.markAsUntouched();  // funcionalidad ya incluida en el FormRegistro.Reset…
   }
 
-  // Buscar segun los filtros, establecidos en FormRegistro
-  Buscar() {
-    this.articulosService
+ // Buscar segun los filtros, establecidos en FormRegistro
+ Buscar() {
+  this.modalDialogService.BloquearPantalla();
+  this.articulosService
     .get(this.FormBusqueda.value.Nombre, this.FormBusqueda.value.Activo, this.Pagina)
     .subscribe((res: any) => {
       this.Items = res.Items;
       this.RegistrosTotal = res.RegistrosTotal;
+      this.modalDialogService.DesbloquearPantalla();
     });
-  }
+}
+
 
   // Obtengo un registro especifico según el Id
   BuscarPorId(Item:Articulo, AccionABMC:string ) {
@@ -143,7 +148,8 @@ export class ArticulosComponent implements OnInit {
   // comienza la modificacion, luego la confirma con el metodo Grabar
   Modificar(Item:Articulo) {
     if (!Item.Activo) {
-      alert("No puede modificarse un registro Inactivo.");
+      // alert("No puede modificarse un registro Inactivo.");
+      this.modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
     this.BuscarPorId(Item, "M");
@@ -177,7 +183,8 @@ Grabar() {
   if (this.AccionABMC == "A") {
     this.articulosService.post(itemCopy).subscribe((res: any) => {
       this.Volver();
-      alert('Registro agregado correctamente.');
+      // alert('Registro agregado correctamente.');
+      this.modalDialogService.Alert("Registro agregado correctamente.");
       this.Buscar();
     });
   } else {
@@ -186,28 +193,31 @@ Grabar() {
       .put(itemCopy.IdArticulo, itemCopy)
       .subscribe((res: any) => {
         this.Volver();
-        alert('Registro modificado correctamente.');
+        // alert('Registro modificado correctamente.');
+        this.modalDialogService.Alert("Registro modificado correctamente.");
         this.Buscar();
       });
   }
 }
 
 // representa la baja logica
-ActivarDesactivar(Item : Articulo) {
-  var resp = confirm(
+ActivarDesactivar(Item:Articulo) {
+  this.modalDialogService.Confirm(
     "Esta seguro de " +
       (Item.Activo ? "desactivar" : "activar") +
-      " este registro?");
-  if (resp === true)
-  {
-   this.articulosService
+      " este registro?",
+    undefined,
+    undefined,
+    undefined,
+    () =>
+      this.articulosService
         .delete(Item.IdArticulo)
         .subscribe((res: any) =>
           this.Buscar()
-        );
-  }
+        ),
+    null
+  );
 }
-
 
   // Volver desde Agregar/Modificar
   Volver() {
@@ -215,7 +225,8 @@ ActivarDesactivar(Item : Articulo) {
   }
 
   ImprimirListado() {
-    alert('Sin desarrollar...');
+    // alert('Sin desarrollar...');
+    this.modalDialogService.Alert("Sin desarrollar...");
   }
   GetArticuloFamiliaNombre(Id:number) {
     let Nombre = this.Familias?.find(x => x.IdArticuloFamilia === Id)?.Nombre;

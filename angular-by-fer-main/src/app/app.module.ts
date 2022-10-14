@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+
 import {
-  NgbPaginationModule
+  NgbPaginationModule,
+  NgbModalModule
 } from "@ng-bootstrap/ng-bootstrap";
 
 
@@ -10,13 +12,15 @@ import { AppComponent } from './app.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { ArticuloFamiliasComponent } from './components/articulo-familias/articulo-familias.component';
+import { ArticulosComponent } from './components/articulos/articulos.component';
 
 import { RouterModule } from '@angular/router';
 import {APP_BASE_HREF} from '@angular/common';
-import { ArticulosComponent } from './components/articulos/articulos.component';
 
 import { ReactiveFormsModule } from "@angular/forms";
 import { NombreArticulosPipe } from './pipes/nombre-articulos.pipe';
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import { MyInterceptor } from "./shared/my-interceptor";
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { NombreArticulosPipe } from './pipes/nombre-articulos.pipe';
     ArticuloFamiliasComponent,
     MenuComponent,
     ArticulosComponent,
-    NombreArticulosPipe
+    NombreArticulosPipe,
+    ModalDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +43,12 @@ import { NombreArticulosPipe } from './pipes/nombre-articulos.pipe';
       { path: 'articulos', component: ArticulosComponent },
     ]),
     NgbPaginationModule,
+    NgbModalModule,
   ],
-  providers: [],
+  entryComponents: [ModalDialogComponent],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: MyInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
