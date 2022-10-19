@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PymesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Articulo">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+    </Key>
+    <Property Name="IdArticulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+    <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CodigoDeBarra" Type="String" MaxLength="13" FixedLength="true" Unicode="true" />
+    <Property Name="IdArticuloFamilia" Type="Int32" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="FechaAlta" Type="DateTime" Precision="0" />
+    <Property Name="Activo" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="ArticulosFamilia">
+    <Key>
+      <PropertyRef Name="IdArticuloFamilia" />
+    </Key>
+    <Property Name="IdArticuloFamilia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AuditoriasABM">
+    <Key>
+      <PropertyRef Name="IdAuditoriaABM" />
+    </Key>
+    <Property Name="IdAuditoriaABM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Tabla" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IdRegistro" Type="Int32" />
+    <Property Name="AccionABM" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IdSession" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="IdCategoria" />
+    </Key>
+    <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cuit" Type="Int64" />
+    <Property Name="IdTipoDocumento" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroDocumento" Type="Int64" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="IdSexo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="IdEstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+    <Property Name="Calle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="NumeroCalle" Type="Int32" />
+    <Property Name="Localidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IdDepartamento" Type="Int32" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <Property Name="IdPais" Type="Int32" />
+    <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+    <Property Name="FechaEgreso" Type="DateTime" Precision="3" />
+    <Property Name="TieneTrabajo" Type="Boolean" />
+    <Property Name="TieneAuto" Type="Boolean" />
+    <Property Name="TieneCasa" Type="Boolean" />
+    <Property Name="CreditoMaximo" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Clave" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="IdUsuario" Type="Int32" />
+    <Property Name="Activo" Type="Boolean" />
+    <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Departamento" Relationship="Self.FK_Clientes_Departamentos" FromRole="Clientes" ToRole="Departamentos" />
+    <NavigationProperty Name="EstadosCivile" Relationship="Self.FK_Clientes_EstadosCiviles" FromRole="Clientes" ToRole="EstadosCiviles" />
+    <NavigationProperty Name="Pais" Relationship="Self.FK_Clientes_Paises" FromRole="Clientes" ToRole="Paises" />
+    <NavigationProperty Name="Sexo" Relationship="Self.FK_Clientes_Sexos" FromRole="Clientes" ToRole="Sexos" />
+    <NavigationProperty Name="TiposDocumento" Relationship="Self.FK_Clientes_TiposDocumentos" FromRole="Clientes" ToRole="TiposDocumentos" />
+    <NavigationProperty Name="Ventas" Relationship="Self.FK_Ventas_ClienteId" FromRole="Clientes" ToRole="Ventas" />
+  </EntityType>
+  <EntityType Name="Contacto">
+    <Key>
+      <PropertyRef Name="IdContacto" />
+    </Key>
+    <Property Name="IdContacto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="3" />
+    <Property Name="Telefono" Type="Int32" />
+    <Property Name="IdCategoria" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Departamento">
+    <Key>
+      <PropertyRef Name="IdDepartamento" />
+    </Key>
+    <Property Name="IdDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdProvincia" Type="Int32" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_Departamentos" FromRole="Departamentos" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="Empresa">
+    <Key>
+      <PropertyRef Name="IdEmpresa" />
+    </Key>
+    <Property Name="IdEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RazonSocial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CantidadEmpleados" Type="Int32" Nullable="false" />
+    <Property Name="FechaFundacion" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
+  <EntityType Name="EstadosCivile">
+    <Key>
+      <PropertyRef Name="IdEstadoCivil" />
+    </Key>
+    <Property Name="IdEstadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_EstadosCiviles" FromRole="EstadosCiviles" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="Grupos">
+    <Key>
+      <PropertyRef Name="IdGrupo" />
+    </Key>
+    <Property Name="IdGrupo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="GruposPermiso">
+    <Key>
+      <PropertyRef Name="IdGrupo" />
+      <PropertyRef Name="IdPermiso" />
+    </Key>
+    <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+    <Property Name="IdPermiso" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IvasTipos">
+    <Key>
+      <PropertyRef Name="IvaTipoId" />
+    </Key>
+    <Property Name="IvaTipoId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RowVersion" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="IdMenu" />
+    </Key>
+    <Property Name="IdMenu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IdMenuPadre" Type="Int32" />
+    <Property Name="Orden" Type="Byte" />
+    <Property Name="IdPermiso" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Pais">
+    <Key>
+      <PropertyRef Name="IdPais" />
+    </Key>
+    <Property Name="IdPais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Poblacion" Type="Int32" />
+    <Property Name="Continente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_Paises" FromRole="Paises" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="Permiso">
+    <Key>
+      <PropertyRef Name="IdPermisos" />
+    </Key>
+    <Property Name="IdPermisos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="IdPersona" />
+    </Key>
+    <Property Name="IdPersona" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Provincia">
+    <Key>
+      <PropertyRef Name="IdProvincia" />
+    </Key>
+    <Property Name="IdProvincia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdPais" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Sesione">
+    <Key>
+      <PropertyRef Name="IdSesion" />
+    </Key>
+    <Property Name="IdSesion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Maquina" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FechaInicio" Type="DateTime" Precision="3" />
+    <Property Name="FechaFin" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuario" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Sexo">
+    <Key>
+      <PropertyRef Name="IdSexo" />
+    </Key>
+    <Property Name="IdSexo" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_Sexos" FromRole="Sexos" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="TelefonoXCliente">
+    <Key>
+      <PropertyRef Name="IdTelefono" />
+    </Key>
+    <Property Name="IdTelefono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TiposDocumento">
+    <Key>
+      <PropertyRef Name="IdTipoDocumento" />
+    </Key>
+    <Property Name="IdTipoDocumento" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_Clientes_TiposDocumentos" FromRole="TiposDocumentos" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Bloqueado" Type="Boolean" />
+    <Property Name="IdRegistroRelacion" Type="Int32" />
+    <Property Name="IdTablaRelacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UsuariosGrupos">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+      <PropertyRef Name="IdGrupo" />
+    </Key>
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="IdGrupo" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="IdVenta" />
+    </Key>
+    <Property Name="IdVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCliente" Type="Int32" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="Cliente" Relationship="Self.FK_Ventas_ClienteId" FromRole="Ventas" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="VentasDetalle">
+    <Key>
+      <PropertyRef Name="IdVentaDetalle" />
+    </Key>
+    <Property Name="IdVentaDetalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdVenta" Type="Int32" Nullable="false" />
+    <Property Name="IdArticulo" Type="Int32" />
+    <Property Name="Cantidad" Type="Int32" />
+    <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_Clientes_Departamentos">
+    <End Role="Departamentos" Type="Self.Departamento" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="IdDepartamento" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_EstadosCiviles">
+    <End Role="EstadosCiviles" Type="Self.EstadosCivile" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadosCiviles">
+        <PropertyRef Name="IdEstadoCivil" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdEstadoCivil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Paises">
+    <End Role="Paises" Type="Self.Pais" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paises">
+        <PropertyRef Name="IdPais" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Sexos">
+    <End Role="Sexos" Type="Self.Sexo" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexos">
+        <PropertyRef Name="IdSexo" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdSexo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_TiposDocumentos">
+    <End Role="TiposDocumentos" Type="Self.TiposDocumento" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Cliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposDocumentos">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ventas_ClienteId">
+    <End Role="Clientes" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Venta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PymesEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Articulos" EntityType="Self.Articulo" />
+    <EntitySet Name="ArticulosFamilias" EntityType="Self.ArticulosFamilia" />
+    <EntitySet Name="AuditoriasABMs" EntityType="Self.AuditoriasABM" />
+    <EntitySet Name="Categorias" EntityType="Self.Categoria" />
+    <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+    <EntitySet Name="Contactos" EntityType="Self.Contacto" />
+    <EntitySet Name="Departamentos" EntityType="Self.Departamento" />
+    <EntitySet Name="Empresas" EntityType="Self.Empresa" />
+    <EntitySet Name="EstadosCiviles" EntityType="Self.EstadosCivile" />
+    <EntitySet Name="Grupos" EntityType="Self.Grupos" />
+    <EntitySet Name="GruposPermisos" EntityType="Self.GruposPermiso" />
+    <EntitySet Name="IvasTipos" EntityType="Self.IvasTipos" />
+    <EntitySet Name="Menus" EntityType="Self.Menu" />
+    <EntitySet Name="Paises" EntityType="Self.Pais" />
+    <EntitySet Name="Permisos" EntityType="Self.Permiso" />
+    <EntitySet Name="Personas" EntityType="Self.Persona" />
+    <EntitySet Name="Provincias" EntityType="Self.Provincia" />
+    <EntitySet Name="Sesiones" EntityType="Self.Sesione" />
+    <EntitySet Name="Sexos" EntityType="Self.Sexo" />
+    <EntitySet Name="TelefonoXClientes" EntityType="Self.TelefonoXCliente" />
+    <EntitySet Name="TiposDocumentos" EntityType="Self.TiposDocumento" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+    <EntitySet Name="UsuariosGrupos" EntityType="Self.UsuariosGrupos" />
+    <EntitySet Name="Ventas" EntityType="Self.Venta" />
+    <EntitySet Name="VentasDetalles" EntityType="Self.VentasDetalle" />
+    <AssociationSet Name="FK_Clientes_Departamentos" Association="Self.FK_Clientes_Departamentos">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_EstadosCiviles" Association="Self.FK_Clientes_EstadosCiviles">
+      <End Role="EstadosCiviles" EntitySet="EstadosCiviles" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Paises" Association="Self.FK_Clientes_Paises">
+      <End Role="Paises" EntitySet="Paises" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Sexos" Association="Self.FK_Clientes_Sexos">
+      <End Role="Sexos" EntitySet="Sexos" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_TiposDocumentos" Association="Self.FK_Clientes_TiposDocumentos">
+      <End Role="TiposDocumentos" EntitySet="TiposDocumentos" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ventas_ClienteId" Association="Self.FK_Ventas_ClienteId">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+    <FunctionImport Name="ClientePorId" ReturnType="Collection(PymesModel.ClientePorId_Result)">
+      <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ClientesContar">
+      <Parameter Name="CantidadDeClientes" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="ClientePorId_Result">
+    <Property Type="Int32" Name="IdCliente" Nullable="false" />
+    <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+    <Property Type="Int64" Name="Cuit" Nullable="true" />
+    <Property Type="String" Name="IdTipoDocumento" Nullable="true" MaxLength="3" />
+    <Property Type="Int64" Name="NumeroDocumento" Nullable="true" />
+    <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" Precision="23" />
+    <Property Type="String" Name="IdSexo" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="IdEstadoCivil" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="Calle" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="NumeroCalle" Nullable="true" />
+    <Property Type="String" Name="Localidad" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="IdDepartamento" Nullable="true" />
+    <Property Type="Int32" Name="IdProvincia" Nullable="true" />
+    <Property Type="Int32" Name="IdPais" Nullable="true" />
+    <Property Type="DateTime" Name="FechaIngreso" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="FechaEgreso" Nullable="true" Precision="23" />
+    <Property Type="Boolean" Name="TieneTrabajo" Nullable="true" />
+    <Property Type="Boolean" Name="TieneAuto" Nullable="true" />
+    <Property Type="Boolean" Name="TieneCasa" Nullable="true" />
+    <Property Type="Decimal" Name="CreditoMaximo" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="Mail" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Clave" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+    <Property Type="Boolean" Name="Activo" Nullable="true" />
+    <Property Type="String" Name="Observaciones" Nullable="true" MaxLength="500" />
+  </ComplexType>
+</Schema>

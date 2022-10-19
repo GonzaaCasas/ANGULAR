@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PymesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Articulos">
+    <Key>
+      <PropertyRef Name="IdArticulo" />
+    </Key>
+    <Property Name="IdArticulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="55" />
+    <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CodigoDeBarra" Type="nchar" MaxLength="13" />
+    <Property Name="IdArticuloFamilia" Type="int" />
+    <Property Name="Stock" Type="int" />
+    <Property Name="FechaAlta" Type="date" />
+    <Property Name="Activo" Type="bit" />
+  </EntityType>
+  <EntityType Name="ArticulosFamilias">
+    <Key>
+      <PropertyRef Name="IdArticuloFamilia" />
+    </Key>
+    <Property Name="IdArticuloFamilia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AuditoriasABM">
+    <Key>
+      <PropertyRef Name="IdAuditoriaABM" />
+    </Key>
+    <Property Name="IdAuditoriaABM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Tabla" Type="varchar" MaxLength="50" />
+    <Property Name="IdRegistro" Type="int" />
+    <Property Name="AccionABM" Type="char" MaxLength="1" />
+    <Property Name="Observaciones" Type="varchar" MaxLength="100" />
+    <Property Name="IdSession" Type="nchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Categorias">
+    <Key>
+      <PropertyRef Name="IdCategoria" />
+    </Key>
+    <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cuit" Type="bigint" />
+    <Property Name="IdTipoDocumento" Type="nvarchar" MaxLength="3" />
+    <Property Name="NumeroDocumento" Type="bigint" />
+    <Property Name="FechaNacimiento" Type="datetime" />
+    <Property Name="IdSexo" Type="nchar" MaxLength="1" />
+    <Property Name="IdEstadoCivil" Type="nchar" MaxLength="1" />
+    <Property Name="Calle" Type="nvarchar" MaxLength="50" />
+    <Property Name="NumeroCalle" Type="int" />
+    <Property Name="Localidad" Type="nvarchar" MaxLength="255" />
+    <Property Name="IdDepartamento" Type="int" />
+    <Property Name="IdProvincia" Type="int" />
+    <Property Name="IdPais" Type="int" />
+    <Property Name="FechaIngreso" Type="datetime" />
+    <Property Name="FechaEgreso" Type="datetime" />
+    <Property Name="TieneTrabajo" Type="bit" />
+    <Property Name="TieneAuto" Type="bit" />
+    <Property Name="TieneCasa" Type="bit" />
+    <Property Name="CreditoMaximo" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Mail" Type="nvarchar" MaxLength="50" />
+    <Property Name="Clave" Type="nvarchar" MaxLength="15" />
+    <Property Name="IdUsuario" Type="int" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="Contactos">
+    <Key>
+      <PropertyRef Name="IdContacto" />
+    </Key>
+    <Property Name="IdContacto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaNacimiento" Type="datetime" />
+    <Property Name="Telefono" Type="int" />
+    <Property Name="IdCategoria" Type="int" />
+  </EntityType>
+  <EntityType Name="Departamentos">
+    <Key>
+      <PropertyRef Name="IdDepartamento" />
+    </Key>
+    <Property Name="IdDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdProvincia" Type="int" />
+  </EntityType>
+  <EntityType Name="Empresas">
+    <Key>
+      <PropertyRef Name="IdEmpresa" />
+    </Key>
+    <Property Name="IdEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RazonSocial" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CantidadEmpleados" Type="int" Nullable="false" />
+    <Property Name="FechaFundacion" Type="smalldatetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadosCiviles">
+    <Key>
+      <PropertyRef Name="IdEstadoCivil" />
+    </Key>
+    <Property Name="IdEstadoCivil" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Grupos">
+    <Key>
+      <PropertyRef Name="IdGrupo" />
+    </Key>
+    <Property Name="IdGrupo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="GruposPermisos">
+    <Key>
+      <PropertyRef Name="IdGrupo" />
+      <PropertyRef Name="IdPermiso" />
+    </Key>
+    <Property Name="IdGrupo" Type="int" Nullable="false" />
+    <Property Name="IdPermiso" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="IvasTipos">
+    <Key>
+      <PropertyRef Name="IvaTipoId" />
+    </Key>
+    <Property Name="IvaTipoId" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menus">
+    <Key>
+      <PropertyRef Name="IdMenu" />
+    </Key>
+    <Property Name="IdMenu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Url" Type="varchar" MaxLength="100" />
+    <Property Name="IdMenuPadre" Type="int" />
+    <Property Name="Orden" Type="tinyint" />
+    <Property Name="IdPermiso" Type="int" />
+  </EntityType>
+  <EntityType Name="Paises">
+    <Key>
+      <PropertyRef Name="IdPais" />
+    </Key>
+    <Property Name="IdPais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Poblacion" Type="int" />
+    <Property Name="Continente" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Permisos">
+    <Key>
+      <PropertyRef Name="IdPermisos" />
+    </Key>
+    <Property Name="IdPermisos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Personas">
+    <Key>
+      <PropertyRef Name="IdPersona" />
+    </Key>
+    <Property Name="IdPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Provincias">
+    <Key>
+      <PropertyRef Name="IdProvincia" />
+    </Key>
+    <Property Name="IdProvincia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="IdPais" Type="int" />
+  </EntityType>
+  <EntityType Name="Sesiones">
+    <Key>
+      <PropertyRef Name="IdSesion" />
+    </Key>
+    <Property Name="IdSesion" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Maquina" Type="varchar" MaxLength="50" />
+    <Property Name="FechaInicio" Type="datetime" />
+    <Property Name="FechaFin" Type="datetime" />
+    <Property Name="IdUsuario" Type="int" />
+  </EntityType>
+  <EntityType Name="Sexos">
+    <Key>
+      <PropertyRef Name="IdSexo" />
+    </Key>
+    <Property Name="IdSexo" Type="nchar" MaxLength="1" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TelefonoXCliente">
+    <Key>
+      <PropertyRef Name="IdTelefono" />
+    </Key>
+    <Property Name="IdTelefono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="Telefono" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TiposDocumentos">
+    <Key>
+      <PropertyRef Name="IdTipoDocumento" />
+    </Key>
+    <Property Name="IdTipoDocumento" Type="nvarchar" MaxLength="3" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Bloqueado" Type="bit" />
+    <Property Name="IdRegistroRelacion" Type="int" />
+    <Property Name="IdTablaRelacion" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UsuariosGrupos">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+      <PropertyRef Name="IdGrupo" />
+    </Key>
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="IdGrupo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ventas">
+    <Key>
+      <PropertyRef Name="IdVenta" />
+    </Key>
+    <Property Name="IdVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdCliente" Type="int" />
+    <Property Name="Fecha" Type="datetime" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="VentasDetalle">
+    <Key>
+      <PropertyRef Name="IdVentaDetalle" />
+    </Key>
+    <Property Name="IdVentaDetalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdVenta" Type="int" Nullable="false" />
+    <Property Name="IdArticulo" Type="int" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <Association Name="FK_Clientes_Departamentos">
+    <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="IdDepartamento" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_EstadosCiviles">
+    <End Role="EstadosCiviles" Type="Self.EstadosCiviles" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadosCiviles">
+        <PropertyRef Name="IdEstadoCivil" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdEstadoCivil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Paises">
+    <End Role="Paises" Type="Self.Paises" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paises">
+        <PropertyRef Name="IdPais" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Sexos">
+    <End Role="Sexos" Type="Self.Sexos" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sexos">
+        <PropertyRef Name="IdSexo" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdSexo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_TiposDocumentos">
+    <End Role="TiposDocumentos" Type="Self.TiposDocumentos" Multiplicity="0..1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposDocumentos">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ventas_ClienteId">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+    <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Ventas">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="ClientePorId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IdCliente" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ClientesContar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CantidadDeClientes" Type="int" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="PymesModelStoreContainer">
+    <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArticulosFamilias" EntityType="Self.ArticulosFamilias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AuditoriasABM" EntityType="Self.AuditoriasABM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Contactos" EntityType="Self.Contactos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadosCiviles" EntityType="Self.EstadosCiviles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grupos" EntityType="Self.Grupos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GruposPermisos" EntityType="Self.GruposPermisos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IvasTipos" EntityType="Self.IvasTipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Permisos" EntityType="Self.Permisos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Personas" EntityType="Self.Personas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Provincias" EntityType="Self.Provincias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sesiones" EntityType="Self.Sesiones" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sexos" EntityType="Self.Sexos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TelefonoXCliente" EntityType="Self.TelefonoXCliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposDocumentos" EntityType="Self.TiposDocumentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsuariosGrupos" EntityType="Self.UsuariosGrupos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VentasDetalle" EntityType="Self.VentasDetalle" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Clientes_Departamentos" Association="Self.FK_Clientes_Departamentos">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_EstadosCiviles" Association="Self.FK_Clientes_EstadosCiviles">
+      <End Role="EstadosCiviles" EntitySet="EstadosCiviles" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Paises" Association="Self.FK_Clientes_Paises">
+      <End Role="Paises" EntitySet="Paises" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Sexos" Association="Self.FK_Clientes_Sexos">
+      <End Role="Sexos" EntitySet="Sexos" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_TiposDocumentos" Association="Self.FK_Clientes_TiposDocumentos">
+      <End Role="TiposDocumentos" EntitySet="TiposDocumentos" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ventas_ClienteId" Association="Self.FK_Ventas_ClienteId">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Ventas" EntitySet="Ventas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
